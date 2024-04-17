@@ -15,7 +15,10 @@ function App() {
 
   return (
     <main className="font-brand relative">
-      <img src="./bg.svg" className="absolute -z-10 -top-5" />
+      <img
+        src="./bg.svg"
+        className="absolute -z-10 -top-5  left-1/2 transform -translate-x-1/2 "
+      />
       <div className="w-screen h-screen flex flex-col justify-center items-center">
         <span
           className="flex gap-3 justify-center items-center px-6 py-1 border-2 border-slate-900 rounded-full cursor-pointer hover:bg-slate-900 hover:text-white transition-all font-semibold"
