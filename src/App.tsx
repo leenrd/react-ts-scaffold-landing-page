@@ -15,8 +15,8 @@ function App() {
   useEffect(() => {
     setTimeout(() => {
       setCopied(false);
-    }, 3000)
-  }, [])
+    }, 3000);
+  }, []);
 
   const codeValue = "npm install @leenard/react-ts-scaffold";
 
@@ -28,7 +28,7 @@ function App() {
       />
       <div className="w-screen h-screen flex flex-col justify-center items-center">
         <span
-          className="flex gap-3 justify-center items-center px-6 py-1 border-2 border-slate-900 rounded-full cursor-pointer hover:bg-slate-900 hover:text-white transition-all font-semibold"
+          className="flex gap-3 justify-center items-center px-6 py-1 border-2 border-accent rounded-full cursor-pointer hover:bg-black hover:text-white transition-all font-semibold"
           onClick={() => redirectToSite("https://github.com/leenrd")}
         >
           <Github className=" h-[1rem] w-[1rem]" />
@@ -177,16 +177,28 @@ const dependencies = [
     name: "Geist sans",
     desc: "Official Vercel font",
     img: "vercel.svg",
-  }
+  },
 ];
 
-const Dependencies = ({ name, desc, img }: { name: string; desc: string, img: string }) => {
+const Dependencies = ({
+  name,
+  desc,
+  img,
+}: {
+  name: string;
+  desc: string;
+  img: string;
+}) => {
   return (
     <Card className="hover:border-1 text-start py-4 hover:border-purple-500 shadow-sm hover:shadow-xl transition duration-300 ease-in-out">
       <CardHeader>
         <CardTitle className="font-bold flex gap-4 items-center">
-          <img className="h-6 w-6 filter invert mix-blend-difference" src={`/${img}`} />
-          {name}</CardTitle>
+          <img
+            className="h-6 w-6 filter invert mix-blend-difference"
+            src={`/${img}`}
+          />
+          {name}
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <p>{desc}</p>
