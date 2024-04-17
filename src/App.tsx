@@ -18,7 +18,7 @@ function App() {
     }, 3000);
   }, []);
 
-  const codeValue = "npm install @leenard/react-ts-scaffold";
+  const codeValue = "git clone git@github.com:leenrd/react-ts-scaffold.git";
 
   return (
     <main className="font-geist relative text-center">
