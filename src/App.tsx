@@ -11,7 +11,7 @@ import { useState } from "react";
 function App() {
   const [copied, setCopied] = useState(false);
   const { toast } = useToast();
-  const codeValue = "npm install @leenrd/react-ts-scaffold";
+  const codeValue = "npm install react-ts-scaffold";
 
   return (
     <main className="font-brand relative">
