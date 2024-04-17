@@ -1,5 +1,6 @@
 {
   "name": "react-ts-scaffold",
+  "description": "React TypeScript Scaffold by Leenard Zarate",
   "private": true,
   "version": "0.0.0",
   "type": "module",
