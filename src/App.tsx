@@ -1,10 +1,18 @@
 import { Button } from "./components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-
-import { Github, MoveRight } from "lucide-react";
+import { Github, MoveRight, Clipboard, Check } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
+import { Toaster } from "@/components/ui/toaster";
 import redirectToSite from "./utils/redirectToSite";
+import { ModeToggle } from "./components/ui/themeToggle";
+import copyText from "./utils/copyText";
+import { useState } from "react";
 
 function App() {
+  const [copied, setCopied] = useState(false);
+  const { toast } = useToast();
+  const codeValue = "npm install @leenrd/react-ts-scaffold";
+
   return (
     <main className="font-brand relative">
       <img src="./bg.svg" className="absolute -z-10 -top-5" />
@@ -44,7 +52,37 @@ function App() {
             Template for Backend
           </Button>
         </div>
+        <div className="mt-16 flex justify-between items-center gap-2">
+          <pre className="bg-secondary-foreground rounded-md w-[30rem] py-2 px-3 ">
+            <code className="text-accent">{codeValue}</code>
+          </pre>
+          <Button
+            onClick={() =>
+              copyText(
+                codeValue,
+                () => {
+                  toast({
+                    description: "Text copied! 🔥🔥🎉",
+                  });
+                  console.log("Text copied!");
+                  setCopied(true);
+                },
+                (error) => {
+                  console.error("Failed to copy:", error);
+                }
+              )
+            }
+            variant={"ghost"}
+          >
+            {copied ? (
+              <Check className="h-4 w-4" />
+            ) : (
+              <Clipboard className="h-4 w-4" />
+            )}
+          </Button>
+        </div>
       </div>
+
       <div className="max-w-[1300px] mx-auto mb-[10rem]">
         <h2 className="text-4xl tracking-tight font-bold text-center mb-20">
           Dependencies
@@ -59,8 +97,8 @@ function App() {
           ))}
         </div>
       </div>
-      <footer className="w-screen bg-slate-50 py-8">
-        <div className="max-w-[1300px] mx-auto flex justify-between">
+      <footer className="w-screen bg-secondary py-8">
+        <div className="max-w-[1300px] mx-auto flex justify-between items-center">
           <p className="font-semibold">
             Built by{" "}
             <a href="https://github.com/leenrd" className="underline">
@@ -75,8 +113,10 @@ function App() {
             </a>{" "}
             .
           </p>
+          <ModeToggle />
         </div>
       </footer>
+      <Toaster />
     </main>
   );
 }
