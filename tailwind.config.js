@@ -19,7 +19,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        brand: ["var(--font-geist-sans)"],
+        geist: ["var(--font-geist-sans)"],
       },
       colors: {
         border: "hsl(var(--border))",

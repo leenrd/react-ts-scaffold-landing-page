@@ -6,15 +6,22 @@ import { Toaster } from "@/components/ui/toaster";
 import redirectToSite from "./utils/redirectToSite";
 import { ModeToggle } from "./components/ui/themeToggle";
 import copyText from "./utils/copyText";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
   const [copied, setCopied] = useState(false);
   const { toast } = useToast();
-  const codeValue = "npm install react-ts-scaffold";
+
+  useEffect(() => {
+    setTimeout(() => {
+      setCopied(false);
+    }, 3000)
+  }, [])
+
+  const codeValue = "npm install @leenard/react-ts-scaffold";
 
   return (
-    <main className="font-brand relative">
+    <main className="font-geist relative text-center">
       <img
         src="./bg.svg"
         className="absolute -z-10 -top-5  left-1/2 transform -translate-x-1/2 "
@@ -56,7 +63,7 @@ function App() {
           </Button>
         </div>
         <div className="mt-16 flex justify-between items-center gap-2">
-          <pre className="bg-secondary-foreground rounded-md w-[30rem] py-2 px-3 ">
+          <pre className="bg-secondary-foreground rounded-md w-fit py-2 px-5">
             <code className="text-accent">{codeValue}</code>
           </pre>
           <Button
@@ -96,13 +103,14 @@ function App() {
               key={dependency.name}
               name={dependency.name}
               desc={dependency.desc}
+              img={dependency.img}
             />
           ))}
         </div>
       </div>
       <footer className="w-screen bg-secondary py-8">
         <div className="max-w-[1300px] mx-auto flex justify-between items-center">
-          <p className="font-semibold">
+          <p className="font-semibold text-wrap text-start">
             Built by{" "}
             <a href="https://github.com/leenrd" className="underline">
               leenard
@@ -128,46 +136,57 @@ const dependencies = [
   {
     name: "React",
     desc: "A JavaScript library for building user interfaces",
+    img: "react.svg",
   },
   {
     name: "TypeScript",
     desc: "A typed superset of JavaScript that compiles to plain JavaScript",
+    img: "typescript.svg",
   },
   {
     name: "TailwindCSS",
-    desc: "A utility-first CSS framework for rapid UI development",
+    desc: "A utility-first CSS framework for rapidly building custom designs",
+    img: "tailwindcss.svg",
   },
   {
     name: "ShadcnUi",
-    desc: "A set of TailwindCSS components",
+    desc: "A set of components for TailwindCSS",
+    img: "shadcnui.svg",
   },
   {
-    name: "Lucide-icons",
+    name: "Lucide Icons",
     desc: "A set of simply beautiful open-source icons",
+    img: "icon.svg",
   },
   {
-    name: "React-router-dom",
+    name: "React Router",
     desc: "Declarative routing for React",
-  },
-  {
-    name: "Geist",
-    desc: "Vercel official font",
-  },
-  {
-    name: "Vite",
-    desc: "A fast development server that supports hot module replacement (HMR) and fast refresh.",
+    img: "reactrouter.svg",
   },
   {
     name: "React Query",
-    desc: "Query data in React with a hook-based approach",
+    desc: "Hooks for fetching, caching and updating asynchronous data in React",
+    img: "reactquery.svg",
   },
+  {
+    name: "Vite",
+    desc: "A build tool that aims to provide a faster and leaner development experience for modern web projects",
+    img: "vite.svg",
+  },
+  {
+    name: "Geist sans",
+    desc: "Official Vercel font",
+    img: "vercel.svg",
+  }
 ];
 
-const Dependencies = ({ name, desc }: { name: string; desc: string }) => {
+const Dependencies = ({ name, desc, img }: { name: string; desc: string, img: string }) => {
   return (
-    <Card className="hover:border-1 hover:border-purple-500 shadow-sm hover:shadow-xl transition duration-300 ease-in-out">
+    <Card className="hover:border-1 text-start py-4 hover:border-purple-500 shadow-sm hover:shadow-xl transition duration-300 ease-in-out">
       <CardHeader>
-        <CardTitle className="font-bold">{name}</CardTitle>
+        <CardTitle className="font-bold flex gap-4 items-center">
+          <img className="h-6 w-6 filter invert mix-blend-difference" src={`/${img}`} />
+          {name}</CardTitle>
       </CardHeader>
       <CardContent>
         <p>{desc}</p>
