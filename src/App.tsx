@@ -1,12 +1,13 @@
 import { Button } from "./components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Github, MoveRight, Clipboard, Check } from "lucide-react";
+import { Clipboard, Check, SquareDashedBottomCode } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { Toaster } from "@/components/ui/toaster";
-import redirectToSite from "./utils/redirectToSite";
+// import redirectToSite from "./utils/redirectToSite";
 import { ModeToggle } from "./components/ui/themeToggle";
 import copyText from "./utils/copyText";
 import { useEffect, useState } from "react";
+import { Badge } from "./components/ui/badge";
 
 function App() {
   const [copied, setCopied] = useState(false);
@@ -18,98 +19,74 @@ function App() {
     }, 3000);
   }, []);
 
-  const codeValue = "git clone git@github.com:leenrd/react-ts-scaffold.git";
+  const codeValue = "npx create-lnrd";
 
   return (
-    <main className="font-geist relative text-center">
+    <main className="inter-family relative text-center">
       <img
         src="./bg.svg"
         className="absolute -z-10 -top-5  left-1/2 transform -translate-x-1/2 "
       />
-      <div className="w-screen h-screen flex flex-col justify-center items-center">
-        <span
-          className="flex gap-3 justify-center items-center px-6 py-1 border-2 border-accent rounded-full cursor-pointer hover:bg-black hover:text-white transition-all font-semibold"
-          onClick={() => redirectToSite("https://github.com/leenrd")}
-        >
-          <Github className=" h-[1rem] w-[1rem]" />
-          <span className="flex gap-2 items-center justify-center">
-            <p className=" ">Visit my other projects</p>
-            <MoveRight className=" h-[1rem] w-[1rem] mt-1" />
-          </span>
-        </span>
+      <div className=" h-screen flex flex-col justify-center items-center">
         <h1 className="scroll-m-20 mt-7 text-4xl font-bold tracking-tight lg:text-5xl">
-          Leenard's Frontend Starter
+          Scaffold projects with ease
         </h1>
-        <p className="leading-7 [&:not(:first-child)]:mt-6">
-          Uses technologies like TypeScript, TailwindCSS w/ ShadcnUi,
-          Lucide-icons, React-router-dom and more.
+        <p className="[&:not(:first-child)]:mt-6 font-normal">
+          Templating that provides clear and bare dependencies to get you
+          started at the speed of thought.
         </p>
-        <div className="mt-9 flex gap-3 items-center justify-center">
-          <Button
-            variant={"default"}
-            onClick={() =>
-              redirectToSite("https://github.com/leenrd/react-ts-scaffold")
-            }
-          >
-            Use Template
-          </Button>
-          <Button
-            variant={"outline"}
-            onClick={() =>
-              redirectToSite("https://github.com/leenrd/node-ts-scaffold")
-            }
-          >
-            Template for Backend
-          </Button>
-        </div>
         <div className="mt-16 flex justify-between items-center gap-2">
-          <pre className="bg-secondary-foreground rounded-md w-fit py-2 px-5">
+          <pre className="bg-secondary-foreground flex items-center rounded-md w-fit py-2 px-5">
             <code className="text-accent">{codeValue}</code>
+            <Button
+              onClick={() =>
+                copyText(
+                  codeValue,
+                  () => {
+                    toast({
+                      description: "Text copied! 🔥🔥🎉",
+                    });
+                    console.log("Text copied!");
+                    setCopied(true);
+                  },
+                  (error) => {
+                    console.error("Failed to copy:", error);
+                  }
+                )
+              }
+              variant={"ghost"}
+              className="hover:bg-secondary-foreground p-0 m-0 ml-5 hover:text-accent transition duration-300 ease-in-out"
+            >
+              {copied ? (
+                <Check className="h-4 w-4 text-background p-0 m-0" />
+              ) : (
+                <Clipboard className="h-4 w-4 text-background p-0 m-0" />
+              )}
+            </Button>
           </pre>
-          <Button
-            onClick={() =>
-              copyText(
-                codeValue,
-                () => {
-                  toast({
-                    description: "Text copied! 🔥🔥🎉",
-                  });
-                  console.log("Text copied!");
-                  setCopied(true);
-                },
-                (error) => {
-                  console.error("Failed to copy:", error);
-                }
-              )
-            }
-            variant={"ghost"}
-          >
-            {copied ? (
-              <Check className="h-4 w-4" />
-            ) : (
-              <Clipboard className="h-4 w-4" />
-            )}
-          </Button>
         </div>
       </div>
 
       <div className="max-w-[1300px] mx-auto mb-[10rem]">
-        <h2 className="text-4xl tracking-tight font-bold text-center mb-20">
-          Dependencies
+        <h2 className="text-4xl tracking-tight font-bold text-center">
+          What's inside?
         </h2>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 mt-5">
+        <p className="mb-20 font-normal mt-6">
+          The starter gives template choices.
+        </p>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-2 mt-5">
           {dependencies.map((dependency) => (
             <Dependencies
               key={dependency.name}
               name={dependency.name}
               desc={dependency.desc}
-              img={dependency.img}
             />
           ))}
         </div>
       </div>
-      <footer className="w-screen bg-secondary py-8">
-        <div className="max-w-[1300px] mx-auto flex justify-between items-center">
+
+      <footer className="bg-secondary py-8">
+        <div className=" flex items-center justify-between px-20">
           <p className="font-semibold text-wrap text-start">
             Built by{" "}
             <a href="https://github.com/leenrd" className="underline">
@@ -134,74 +111,45 @@ function App() {
 
 const dependencies = [
   {
-    name: "React",
-    desc: "A JavaScript library for building user interfaces",
-    img: "react.svg",
+    name: "Vitretack",
+    desc: "Frontend template.",
+    arr: ["React", "TypeScript", "TailwindCSS", "Vite", "Tanstack"],
   },
   {
-    name: "TypeScript",
-    desc: "A typed superset of JavaScript that compiles to plain JavaScript",
-    img: "typescript.svg",
+    name: "Extygo",
+    desc: "Backend template.",
+    arr: ["Express", "TypeScript", "Mongo"],
   },
   {
-    name: "TailwindCSS",
-    desc: "A utility-first CSS framework for rapidly building custom designs",
-    img: "tailwindcss.svg",
+    name: "Extyql",
+    desc: "Backend template.",
+    arr: ["Express", "TypeScript", "Postgres"],
   },
   {
-    name: "ShadcnUi",
-    desc: "A set of components for TailwindCSS",
-    img: "shadcnui.svg",
-  },
-  {
-    name: "Lucide Icons",
-    desc: "A set of simply beautiful open-source icons",
-    img: "icon.svg",
-  },
-  {
-    name: "React Router",
-    desc: "Declarative routing for React",
-    img: "reactrouter.svg",
-  },
-  {
-    name: "React Query",
-    desc: "Hooks for fetching, caching and updating asynchronous data in React",
-    img: "reactquery.svg",
-  },
-  {
-    name: "Vite",
-    desc: "A build tool that aims to provide a faster and leaner development experience for modern web projects",
-    img: "vite.svg",
-  },
-  {
-    name: "Geist sans",
-    desc: "Official Vercel font",
-    img: "vercel.svg",
+    name: "Nextyred",
+    desc: "Full-stack template.",
+    arr: ["NextJs", "TypeScript", "Redis", "Tailwind"],
   },
 ];
 
-const Dependencies = ({
-  name,
-  desc,
-  img,
-}: {
-  name: string;
-  desc: string;
-  img: string;
-}) => {
+const Dependencies = ({ name, desc }: { name: string; desc: string }) => {
+  const curr = dependencies.find((dep) => dep.name === name);
+
   return (
     <Card className="hover:border-1 text-start py-4 hover:border-purple-500 shadow-sm hover:shadow-xl transition duration-300 ease-in-out">
       <CardHeader>
         <CardTitle className="font-bold flex gap-4 items-center">
-          <img
-            className="h-6 w-6 filter invert mix-blend-difference"
-            src={`/${img}`}
-          />
+          <SquareDashedBottomCode />
           {name}
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <p>{desc}</p>
+        <p className="mb-3">{desc}</p>
+        {curr?.arr.map((dep) => (
+          <Badge key={dep} className="mr-2 rounded-sm">
+            {dep}
+          </Badge>
+        ))}
       </CardContent>
     </Card>
   );
