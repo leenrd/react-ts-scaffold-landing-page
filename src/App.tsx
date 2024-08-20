@@ -119,22 +119,22 @@ function App() {
 
 const dependencies = [
   {
-    name: "Vitretack",
+    name: "V1",
     desc: "Frontend template.",
     arr: ["React", "TypeScript", "TailwindCSS", "Vite", "Tanstack"],
   },
   {
-    name: "Extygo",
+    name: "V2",
     desc: "Backend template.",
     arr: ["Express", "TypeScript", "Mongo"],
   },
   {
-    name: "Extyql",
+    name: "V3",
     desc: "Backend template.",
     arr: ["Express", "TypeScript", "Postgres"],
   },
   {
-    name: "Nextyred",
+    name: "V4",
     desc: "Full-stack template.",
     arr: ["NextJs", "TypeScript", "Redis", "Tailwind"],
   },
